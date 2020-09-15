@@ -1,0 +1,16 @@
+{
+   "content_scripts": [{
+      "all_frames": true,
+      "js": [ "extension.js"  ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }],
+   "description": "Simple ADRUM extension to inject javascript into a website",
+   "manifest_version": 2,
+   "web_accessible_resources": [
+      "agent.js"
+   ],
+   "name": "Simple ADRUM extension",
+   "permissions": [ "<all_urls>" ],
+   "version": "0.0.1"
+}
