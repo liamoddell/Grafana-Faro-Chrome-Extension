@@ -1,6 +1,6 @@
 # Grafana Faro Extension
 
-This is a very simple chrome extension, that allows you to inject the Grafana Browser Real User Monitoring & Tracing SDKs into websites.
+This is a very simple chrome extension that allows you to inject the Grafana Browser Real User Monitoring & Tracing SDKs into websites.
 
 Importantly, this extension leverages [corsproxy.io](https://corsproxy.io/) to address CORS-related errors when injecting the code. The recommendation is to only use this extension for **demo purposes**, and to be mindful of disabling this extension when performing any potentially sensitive tasks.
 
