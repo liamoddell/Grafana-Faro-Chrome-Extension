@@ -30,12 +30,12 @@ async function loadFaroSdk() {
 
         // Check if the extension is enabled and the current URL contains the specified string
         if (extensionEnabled && checkUrlContains(urlString)) {
-            console.log("URL string matches: " + window.location.href);
+            console.log("[faro.js] URL string matches: " + window.location.href);
 
             // Use of CORSProxy needed to avoid CORS-related issues
             const corsProxy = 'https://corsproxy.io/?';
             const faroProxyUrl = corsProxy + faroURL;
-            console.log("Attempting to send data to: " + faroProxyUrl);
+            console.log("[faro.js] Attempting to send data to: " + faroProxyUrl);
 
             // Load Faro SDK and instrumentation
             await Promise.all([
@@ -64,17 +64,17 @@ async function loadFaroSdk() {
             console.log("[faro.js] faroSdk loaded");
             console.log("[faro.js] webTracing loaded");
         } else {
-            console.log("URL string does not match: " + window.location.href + ' or extension disabled. Not loading the Faro SDK.');
+            console.log("[faro.js] URL string does not match: " + window.location.href + ' or extension disabled. Not loading the Faro SDK.');
         }
     } catch (error) {
-        console.error("Error loading Faro SDK:", error);
+        console.error("[faro.js] Error loading Faro SDK:", error);
     }
 }
 
 // Function to check if the current URL contains the specified string
 function checkUrlContains(urlString) {
     const currentUrl = window.location.href;
-    console.log("Current URL: " + currentUrl);
+    console.log("[faro.js] Current URL: " + currentUrl);
     // Create a regular expression that matches at least 4 characters from the urlString
     const regex = new RegExp(`\\w{4,}`, "i");
     return regex.test(currentUrl) && currentUrl.includes(urlString);
