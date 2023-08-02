@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Grafana Faro Injector</title>
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+      <style>
+         body {
+         /* Set the font-family to Roboto */
+         font-family: 'Roboto', sans-serif;
+         width: 300px;
+         height: 273px;
+         padding: 10px;
+         background-color: #1a1a1a;
+         color: #ffffff;
+         }
+         h1 {
+         color: #F05A28; /* Highlight color */
+         text-align: center;
+         }
+         label {
+         display: block;
+         margin-bottom: 5px;
+         color: #a0a0a0; /* Subdued label color */
+         }
+         input[type="text"] {
+         width: 95%;
+         padding: 5px;
+         margin-bottom: 10px;
+         background-color: #333333; /* Darker input background color */
+         color: #ffffff; /* Light text color for inputs */
+         }
+         button {
+         padding: 8px 30.7px;
+         background-color: #F05A28;
+         color: #fff;
+         border: none;
+         cursor: pointer;
+         }
+         button:hover {
+         background-color: #d45123; /* Darker background color on hover */
+         }
+         buttons-container {
+         justify-content: space-around;
+         }
+         /* Style for the success message */
+         .success-message {
+         background-color: #0078d4;
+         color: #ffffff;
+         padding: 0px;
+         margin-top: 10px;
+         text-align: center;
+         }
+         /* Style for the switch toggle */
+         .toggle-switch {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin-bottom: 10px;
+         }
+         .toggle-switch-title {
+         margin-right: 10px;
+         color: #a0a0a0;      
+         }
+         /* Style for the toggle slider */
+         .toggle-slider {
+         position: relative;
+         display: inline-block;
+         width: 40px;
+         height: 20px;
+         background-color: #ccc;
+         border-radius: 34px;
+         transition: .4s;
+         }
+         .toggle-slider:before {
+         position: absolute;
+         content: "";
+         height: 16px;
+         width: 16px;
+         left: 2px;
+         bottom: 2px;
+         background-color: white;
+         border-radius: 50%;
+         transition: .4s;
+         }
+         input:checked + .toggle-slider {
+         background-color: #F05A28;
+         }
+         input:checked + .toggle-slider:before {
+         transform: translateX(20px);
+         }
+         /* Hide the checkbox input visually */
+         .toggle-switch input[type="checkbox"] {
+         position: absolute;
+         opacity: 0;
+         width: 0;
+         height: 0;
+         }
+         /* Additional styles for the logo */
+         .title-with-logo {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         }
+         .logo {
+         width: 24px; /* Adjust the size of the logo as needed */
+         height: 24px;
+         margin-right: 8px; /* Add some spacing between the logo and the title */
+         }
+      </style>
+   </head>
+   <body>
+      <h1 class="title-with-logo">
+         <!-- Add the logo using the <img> tag -->
+         <img src="icons/grafana_logo.png" alt="Logo" class="logo">
+         Grafana Faro Injector
+      </h1>
+      <div class="toggle-switch">
+         <div class="toggle-switch-title">Enable Extension:</div>
+         <!-- Checkbox input outside the label -->
+         <input type="checkbox" id="toggleExtension" class="toggle-checkbox">
+         <!-- Toggle slider -->
+         <label class="toggle-slider" for="toggleExtension">
+         <span class="toggle-slider-thumb"></span>
+         </label>
+      </div>
+      <label for="faroUrl">Faro URL:</label>
+      <input type="text" id="faroUrl" name="faroUrl" placeholder="Example: https://<faro_collector>/collect/<UID>">
+      <label for="urlString">Monitored URL Contains:</label>
+      <input type="text" id="urlString" name="urlString" placeholder="Example: amazon.com">
+      <div class="buttons-container">
+         <button class="button" id="saveButton">Save</button>
+         <button class="button" id="clearButton">Clear</button>
+         <button class="button" id="restoreButton">Restore</button>
+      </div>
+      <script src="popup.js"></script>
+   </body>
+</html>
