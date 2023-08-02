@@ -1,6 +1,6 @@
 # Grafana Faro Extension
 
-This is a very simple chrome extension, that allows you to inject the Grafana Browser Real User Monitoring & Tracing SDKs into websites.
+This is a very simple chrome extension that allows you to inject the Grafana Faro & Tracing SDKs into websites you visit.
 
 ## Installation
 
