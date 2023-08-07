@@ -24,7 +24,7 @@ Load any website now and you should see the following message in the developer t
 [faro.js] Current URL: <your_url>
 ```
 
-and (once the URL matches) 
+and
 
 ```
 [faro.js] faroSdk loaded
@@ -44,7 +44,7 @@ To configure the extension, you will need the endpoint URL of your Grafana Front
       app: {
         ...
 ```
-The extension also supports matching on a specific URL string to ensure only certain pages are instrumented & monitored. At this time, this r**equires a match pattern of > 4 consecutive alphanumeric characters**, with **no wildcard/regex support currently in place** (WIP).
+The extension also supports matching on a specific URL string to ensure only certain pages are instrumented & monitored. At this time, this **requires a match pattern of > 4 consecutive alphanumeric characters**, with **no wildcard/regex support currently in place** (WIP). A blank string will match on all webpages.
 
 ## Options
 
