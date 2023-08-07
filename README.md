@@ -24,7 +24,7 @@ Load any website now and you should see the following message in the developer t
 [faro.js] Current URL: <your_url>
 ```
 
-and also 
+and (once the URL matches) 
 
 ```
 [faro.js] faroSdk loaded
