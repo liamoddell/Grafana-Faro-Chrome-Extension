@@ -2,7 +2,7 @@
 
 This is a very simple chrome extension that allows you to inject the Grafana Browser Real User Monitoring & Tracing SDKs into websites.
 
-Importantly, this extension leverages [corsproxy.io](https://corsproxy.io/) to address CORS-related errors when injecting the code. The recommendation is to only use this extension for **demo purposes**, and to be mindful of disabling this extension when performing any potentially sensitive tasks.
+Importantly, this extension leverages [corsproxy.io](https://corsproxy.io/) to address CORS-related errors when injecting the code. The recommendation is to only use this extension for **demo purposes**; be mindful of disabling this extension when performing any potentially sensitive tasks, and only monitor websites that you have explicit permission to monitor.
 
 Both the **faro-web-sdk.iife.js** & **faro-web-tracing.iife.js** are stored locally. These files should be replaced frequently to maintain version/feature parity with new releases of Grafana Faro.
 
