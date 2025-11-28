@@ -15,7 +15,7 @@ The extension automatically instruments websites with:
 - **Errors & Exceptions**: JavaScript errors and unhandled promise rejections
 - **Console Logs**: Console output (log, warn, error, etc.)
 - **Web Vitals**: Core Web Vitals (LCP, FID, CLS, INP, TTFB, FCP)
-- **User Actions**: Click interactions on elements with `data-faro-user-action-name` attribute
+- **User Actions**: Click interactions on elements with `data-faro-user-action-name` attribute (TEMPERAMENTAL - WIP)
 - **HTTP Requests**: Fetch API and XMLHttpRequest calls with timing and status
 - **Session Tracking**: User sessions with unique session IDs
 - **Performance Metrics**: Resource timing and navigation performance
