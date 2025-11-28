@@ -1,6 +1,6 @@
 # Grafana Frontend O11y Extension
 
-This is a very simple Chrome extension that allows you to inject the Grafana Faro Real User Monitoring & Tracing SDKs into websites for Frontend Observability.
+This is a very simple Chrome extension that allows you to inject the Grafana Frontend O11y SDK (also known as Faro) to enable Frontend Observability monitoring of websites without first-hand code access.
 
 Both the **faro-web-sdk.iife.js** (v2.0.2) & **faro-web-tracing.iife.js** (v2.0.2) are stored locally. These files should be replaced frequently to maintain version/feature parity with new releases of Grafana Faro.
 
