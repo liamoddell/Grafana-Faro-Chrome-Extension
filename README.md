@@ -55,9 +55,9 @@ webSdkScript.onload = () => {
 
 The extension supports flexible URL matching to ensure only certain pages are instrumented & monitored:
 
-- **Plain text**: `worldline.com` matches any URL containing this string
-- **Wildcards**: `*.worldline.com` or `worldline.*` using `*` as a wildcard
-- **Regex**: `/worldline\.com$/` for advanced pattern matching (wrap in forward slashes)
+- **Plain text**: `google.com` matches any URL containing this string
+- **Wildcards**: `*.google.com` or `google.*` using `*` as a wildcard
+- **Regex**: `/google\.com$/` for advanced pattern matching (wrap in forward slashes)
 - **Match all**: Leave blank to monitor all webpages
 
 ### Configuring CORS Domains
@@ -80,7 +80,7 @@ Before the extension can send telemetry data, you need to configure allowed doma
 
 **Faro Collector URL**: The collector endpoint URL from your Grafana Cloud Frontend Observability application.
 
-**Monitored URL Contains**: Optional URL filter. Supports plain text (e.g., `amazon.com`), wildcards (e.g., `*.amazon.com`), or regex (e.g., `/amazon\.com$/`). Leave blank to monitor all sites.
+**Monitored URL Contains**: Optional URL filter. Supports plain text (e.g., `google.com`), wildcards (e.g., `*.google.com`), or regex (e.g., `/google\.com$/`). Leave blank to monitor all sites.
 
 **Save**: Saves the current configuration into Chrome storage for persistent usage.
 
