@@ -112,7 +112,34 @@ function checkUrlContains(urlString) {
     if (!urlString || urlString.trim() === "") {
         return true;
     }
-    return window.location.href.toLowerCase().includes(urlString.toLowerCase());
+
+    const currentUrl = window.location.href;
+
+    if (urlString.startsWith('/') && urlString.endsWith('/')) {
+        try {
+            const pattern = urlString.slice(1, -1);
+            const regex = new RegExp(pattern);
+            return regex.test(currentUrl);
+        } catch (e) {
+            console.error("[Faro] Invalid regex pattern:", e);
+            return false;
+        }
+    }
+
+    if (urlString.includes('*')) {
+        const pattern = urlString
+            .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+            .replace(/\*/g, '.*');
+        try {
+            const regex = new RegExp(pattern, 'i');
+            return regex.test(currentUrl);
+        } catch (e) {
+            console.error("[Faro] Invalid wildcard pattern:", e);
+            return false;
+        }
+    }
+
+    return currentUrl.toLowerCase().includes(urlString.toLowerCase());
 }
 
 loadFaroSdk();
