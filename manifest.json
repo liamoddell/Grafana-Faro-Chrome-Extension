@@ -2,7 +2,7 @@
    "manifest_version": 3,
    "name": "Faro JavaScript Injector",
    "description": "Simple Faro extension to inject javascript into a website",
-   "version": "1.0",
+   "version": "2.0",
    "action": {
       "default_popup": "popup.html"
    },
