@@ -41,58 +41,68 @@ async function loadFaroSdk() {
         const extensionEnabled = result.extensionEnabled !== undefined ? result.extensionEnabled : true;
         const appName = "faro-browser-extension";
 
-        if (extensionEnabled && checkUrlContains(urlString)) {
-            console.log("[Faro] Loading SDK for:", window.location.href);
-
-            const transportProxyUrl = chrome.runtime.getURL("faro-transport-proxy.js");
-            const sdkUrl = chrome.runtime.getURL("scripts/faro-web-sdk.iife.js");
-            const tracingUrl = chrome.runtime.getURL("scripts/faro-web-tracing.iife.js");
-            const initUrl = chrome.runtime.getURL("faro-init.js");
-
-            const configScript = document.createElement('script');
-            configScript.id = 'faro-config';
-            configScript.type = 'application/json';
-            configScript.textContent = JSON.stringify({
-                faroURL: faroURL,
-                appName: appName
-            });
-
-            (document.head || document.documentElement).appendChild(configScript);
-
-            const transportProxyScript = document.createElement('script');
-            transportProxyScript.src = transportProxyUrl;
-            transportProxyScript.type = 'text/javascript';
-            (document.head || document.documentElement).appendChild(transportProxyScript);
-
-            const sdkScript = document.createElement('script');
-            sdkScript.src = sdkUrl;
-            sdkScript.type = 'text/javascript';
-
-            sdkScript.onload = function() {
-                const tracingScript = document.createElement('script');
-                tracingScript.src = tracingUrl;
-                tracingScript.type = 'text/javascript';
-
-                tracingScript.onload = function() {
-                    const initScript = document.createElement('script');
-                    initScript.src = initUrl;
-                    initScript.type = 'text/javascript';
-                    (document.head || document.documentElement).appendChild(initScript);
-                };
-
-                tracingScript.onerror = function(error) {
-                    console.error("[Faro] Failed to load tracing:", error);
-                };
-
-                (document.head || document.documentElement).appendChild(tracingScript);
-            };
-
-            sdkScript.onerror = function(error) {
-                console.error("[Faro] Failed to load SDK:", error);
-            };
-
-            (document.head || document.documentElement).appendChild(sdkScript);
+        if (!extensionEnabled) {
+            return;
         }
+
+        if (!faroURL) {
+            return;
+        }
+
+        if (!checkUrlContains(urlString)) {
+            return;
+        }
+
+        console.log("[Faro] Loading SDK for:", window.location.href);
+
+        const transportProxyUrl = chrome.runtime.getURL("faro-transport-proxy.js");
+        const sdkUrl = chrome.runtime.getURL("scripts/faro-web-sdk.iife.js");
+        const tracingUrl = chrome.runtime.getURL("scripts/faro-web-tracing.iife.js");
+        const initUrl = chrome.runtime.getURL("faro-init.js");
+
+        const configScript = document.createElement('script');
+        configScript.id = 'faro-config';
+        configScript.type = 'application/json';
+        configScript.textContent = JSON.stringify({
+            faroURL: faroURL,
+            appName: appName
+        });
+
+        (document.head || document.documentElement).appendChild(configScript);
+
+        const transportProxyScript = document.createElement('script');
+        transportProxyScript.src = transportProxyUrl;
+        transportProxyScript.type = 'text/javascript';
+        (document.head || document.documentElement).appendChild(transportProxyScript);
+
+        const sdkScript = document.createElement('script');
+        sdkScript.src = sdkUrl;
+        sdkScript.type = 'text/javascript';
+
+        sdkScript.onload = function() {
+            const tracingScript = document.createElement('script');
+            tracingScript.src = tracingUrl;
+            tracingScript.type = 'text/javascript';
+
+            tracingScript.onload = function() {
+                const initScript = document.createElement('script');
+                initScript.src = initUrl;
+                initScript.type = 'text/javascript';
+                (document.head || document.documentElement).appendChild(initScript);
+            };
+
+            tracingScript.onerror = function(error) {
+                console.error("[Faro] Failed to load tracing:", error);
+            };
+
+            (document.head || document.documentElement).appendChild(tracingScript);
+        };
+
+        sdkScript.onerror = function(error) {
+            console.error("[Faro] Failed to load SDK:", error);
+        };
+
+        (document.head || document.documentElement).appendChild(sdkScript);
     } catch (error) {
         console.error("[Faro] Loading error:", error);
     }
