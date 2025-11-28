@@ -30,9 +30,9 @@
                 ]
             });
 
-            console.log("[Faro] Initialized successfully");
+            console.log("[Faro] Initialised successfully");
         } catch (error) {
-            console.error("[Faro] Initialization failed:", error);
+            console.error("[Faro] Initialisation failed:", error);
         }
     }
 

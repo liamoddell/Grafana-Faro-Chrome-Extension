@@ -1,10 +1,10 @@
-# Grafana Faro Extension
+# Grafana Frontend O11y Extension
 
-This is a very simple Chrome extension that allows you to inject the Grafana Browser Real User Monitoring & Tracing SDKs into websites.
+This is a very simple Chrome extension that allows you to inject the Grafana Faro Real User Monitoring & Tracing SDKs into websites for Frontend Observability.
 
 Both the **faro-web-sdk.iife.js** (v2.0.2) & **faro-web-tracing.iife.js** (v2.0.2) are stored locally. These files should be replaced frequently to maintain version/feature parity with new releases of Grafana Faro.
 
-Importantly, this extension uses a **transport proxy** to automatically bypass Content Security Policy (CSP) restrictions when sending telemetry data. The extension leverages Chrome's extension privileges to make requests that would otherwise be blocked by strict website security policies. The recommendation is to only use this extension for **demo purposes**; be mindful of disabling this extension when performing any potentially sensitive tasks, and only monitor websites that you have explicit permission to monitor.
+Importantly, this extension uses a **transport proxy** (faro-transport-proxy.js) to automatically bypass Content Security Policy (CSP) restrictions when sending telemetry data. The proxy intercepts requests from the Faro SDK running in the page context and routes them through the Chrome extension's content script, which has elevated privileges to bypass CSP. The recommendation is to only use this extension for **demo purposes**; be mindful of disabling this extension when performing any potentially sensitive tasks, and only monitor websites that you have explicit permission to monitor.
 
 **Prerequisites**: You will need a [Grafana Cloud account](https://grafana.com/auth/sign-up/create-user) with Frontend Observability enabled to use this extension.
 
@@ -36,7 +36,7 @@ Load any website now and you should see the following message in the developer t
 
 ```
 [Faro] Loading SDK for: <your_url>
-[Faro] Initialized successfully
+[Faro] Initialised successfully
 ```
 
 With this you have the extension up and running.
@@ -95,7 +95,7 @@ Check your Grafana Cloud dashboard in 1-2 minutes after triggering to verify the
 
 ### Content Security Policy (CSP)
 
-The extension automatically handles CSP restrictions using a transport proxy. If you see CSP-related errors in the console, they should not prevent telemetry from being sent. The extension intercepts Faro requests and proxies them through the content script, which has Chrome extension privileges and bypasses CSP.
+The extension automatically handles CSP restrictions using a transport proxy (faro-transport-proxy.js). If you see CSP-related errors in the console, they should not prevent telemetry from being sent. The transport proxy intercepts fetch requests from the Faro SDK in the page context and routes them through the content script (faro.js), which has Chrome extension privileges and bypasses CSP.
 
 ### "Failed to fetch" Errors
 
@@ -134,6 +134,17 @@ action.end();
 ```
 
 If you're testing on a website you don't control, you won't see user actions unless that website has implemented this.
+
+## How It Works
+
+The extension consists of several key components:
+
+1. **faro.js** (content script) - Loads the Faro SDK and handles fetch proxying between page and extension contexts
+2. **faro-transport-proxy.js** - Injected into page context, intercepts Faro collector requests and proxies them through the content script to bypass CSP
+3. **faro-init.js** - Initialises the Faro SDK with all instrumentations in the page context
+4. **popup.html/popup.js** - Extension configuration interface
+
+The transport proxy is the key to bypassing CSP restrictions. When the Faro SDK attempts to send telemetry to the collector, faro-transport-proxy.js intercepts the fetch call and uses postMessage to communicate with faro.js (content script), which then makes the actual request with extension privileges that bypass CSP.
 
 ## Updating Faro SDK
 
